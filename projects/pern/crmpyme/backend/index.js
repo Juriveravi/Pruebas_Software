@@ -1,10 +1,12 @@
 require('dotenv').config({ path: require('path').resolve(__dirname, 'documents/.env') });
 const express = require('express');
+const cors = require('cors');
 const { ok, fail } = require('./src/utils/apiResponse');
 const authService = require('./src/modules/auth/auth.service');
 
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
 app.get('/ping', (req, res) => res.send('pong'));
