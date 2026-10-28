@@ -12,7 +12,7 @@ function authError(status, code, message) {
 async function login(correo, password) {
   const usuario = await Usuario.findOne({ where: { correo }, include: Rol });
 
-  if (!usuario) {
+  if (!usuario || !usuario.activo) {
     throw authError(401, 'CREDENCIALES_INVALIDAS', 'Correo o contraseña incorrectos');
   }
 

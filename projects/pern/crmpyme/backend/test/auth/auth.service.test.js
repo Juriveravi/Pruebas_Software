@@ -1,3 +1,4 @@
+process.env.JWT_SECRET = 'secreto-de-pruebas';
 const bcrypt = require('bcrypt');
 jest.mock('../../models', () => ({ Usuario: { findOne: jest.fn() }, Rol:
 {} }));
@@ -13,7 +14,7 @@ describe('authService.login', () => {
  const hash = await bcrypt.hash('Admin123', 10);
  const usuarioMock = {
  id: 1, nombre: 'Administrador Inicial', passwordHash: hash,
- intentosFallidos: 0, bloqueadoHasta: null, Rol: { nombre:
+ intentosFallidos: 0, bloqueadoHasta: null, activo: true, Rol: { nombre:
 'administrador' }, update: jest.fn(),
  };
  Usuario.findOne.mockResolvedValueOnce(usuarioMock);
